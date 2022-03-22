@@ -1,0 +1,39 @@
+<!--
+ * @Description: 
+ * @Version: 0.0.1
+ * @Autor: zhj1214
+ * @Date: 2022-02-17 14:00:31
+ * @LastEditors: zhj1214
+ * @LastEditTime: 2022-03-02 11:15:59
+-->
+<div class="wh">
+  父元素div
+  <p class="wh">
+    子元素p
+    <span class="wh">孙元素span</span>
+  </p>
+</div>
+<style>
+  .wh {
+    width: 7.5em;
+    height: 7.5em;
+  }
+
+  div {
+    font-size: 40px;/* 即1em = 40px = font-size */
+    border: solid 2px black;
+  }
+
+  p {
+    font-size: 30px;/* 相对于父级 20px = (40*0.5)px */
+    border: solid 2px blue;
+    color: blue;
+  }
+
+  span {
+    font-size: 1em;
+    border: solid 1px red;
+    display: block;
+    color: red;
+  }
+</style>

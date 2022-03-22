@@ -1,0 +1,164 @@
+<!--
+ * @Description: 
+ * @Version: 0.0.1
+ * @Autor: zhj1214
+ * @Date: 2021-12-16 14:38:07
+ * @LastEditors: zhj1214
+ * @LastEditTime: 2022-02-17 14:00:09
+-->
+<style type="text/css">
+    .item {
+        width: 200px;
+        height: 44px;
+        background-color: aqua;
+        border: 1px solid red;
+    }
+
+    .parent {
+        width: -moz-fit-content;
+        width: -webkit-fit-content;
+        width: fit-content;
+        margin: 10px auto;
+    }
+
+    .son {
+        display: flex;
+        justify-content: center;
+    }
+
+    .son1 {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    .son2 {
+        position: absolute;
+        top: 20px;
+        width: 600px;
+        left: 50%;
+        background-color: blue;
+        margin-left: calc(-0.5 * 600px);
+    }
+
+    .son3 {
+        position: absolute;
+        width: 600px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    .son4 {
+        position: relative;
+        width: 600px;
+        left: 50%;
+        transform: translate(-50%, 0%);
+    }
+
+    .parentView {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        background-color: red;
+    }
+
+    .child {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        width: 200px;
+        background-color: rgba(222, 201, 110, 0.5);
+    }
+</style>
+
+<div>
+    <div class="parentView" style="width: 200px;">
+        <img src="../Downloads/1111.png" alt="" srcset="">
+        <div class="child">
+            说的阿萨德阿萨德按时的ddddddd萨达所大说的阿萨德阿萨德按时的说的阿萨德阿萨德按时的说的阿萨德阿萨德按时的说的阿萨德阿萨德按时的说的阿萨德阿萨德按时的说的阿萨德阿萨德按时的说的阿萨德阿萨德按时的</div>
+    </div>
+    <div style="background-color: black;">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+
+    <div style="text-align: center;margin: 10px 0;">
+        <div>父级：text-align: center;</div>
+        <span>span1</span>
+        <span>span2</span>
+        <span>span3</span>
+    </div>
+
+    <div class="item" style="margin: 0 auto;">margin 0 auto</div>
+    <div class="parent">
+        <div class="item">父级：margin: 10px auto;</div>
+        <div class="item">width: fit-content;</div>
+        <div class="item">margin: 0px auto;</div>
+    </div>
+
+    <div class="son">
+        <div class="item">父级：display: flex;</div>
+        <div class="item">justify-content: center;</div>
+    </div>
+
+    <div class="son1" style="margin-top: 10px;">
+        <div class="item" style="width: auto;">父级：position: absolute;left: 50%;transform: translate(-50%, 0);</div>
+    </div>
+    <div class="son2" style="margin-top: 10px;top: 380px;">
+        <div class="item" style="width: auto;">父级：position: absolute;width: 100px;left: 50%;margin-left: calc(-0.5 *
+            100px);</div>
+    </div>
+    <div class="son3" style="margin-top: 10px;top: 440px;">
+        <div class="item" style="width: auto;">父级：position: absolute;width: 100px;left: 0;right: 0;margin: 0 auto;</div>
+    </div>
+
+    <div class="son4" style="margin-top: 10px;">
+        <div class="item" style="width: auto;">父级：position:relative;width: 600px;left: 50%;transform: translate(-50%,
+            0%);</div>
+    </div>
+
+</div>
+
+
+<script>
+    const p1 = new Promise(function (resolve, reject) {
+        setTimeout(() => resolve('222222'), 2000)
+    })
+    const p2 = new Promise(function (resolve, reject) {
+        setTimeout(() => resolve('1111111'), 1000)
+    })
+    const p3 = new Promise(function (resolve, reject) {
+        setTimeout(() => resolve('333333'), 3000)
+    })
+
+    const list = [p1, p2, p3]
+
+    let arr = []
+
+    list.forEach((p, index) => {
+        p.then(e => {
+            arr[index] = e
+            if (arr.length === 3)
+                console.log('请求结果111', arr)
+        })
+    })
+
+
+
+
+    Promise.all([p1, p2, p3])
+        // Promise.allSettled([p1,p2,p3])
+        // Promise.race([p1, p2, p3])
+        // p2
+        .then(result => {
+            console.log(result)
+            console.log('请求结果', arr)
+        })
+        .catch(error => console.log(error))
+
+    //   Promise.reject(2).then((val) => {console.log('000',val)}, (val) => {console.log('01',val)})
+    //   Promise.reject(2).finally((val) => {console.log('002',val)})
+</script>
+

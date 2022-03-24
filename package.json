@@ -1,0 +1,19 @@
+{
+  "name": "html-learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preacp": "git add .",
+    "acp": "git commit -m",
+    "postacp": "git pull;git push",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/zhj1214/html-learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,69 @@
+<!--
+ * @Description: 
+ * @Version: 0.0.1
+ * @Autor: zhj1214
+ * @Date: 2021-10-08 18:29:27
+ * @LastEditors: zhj1214
+ * @LastEditTime: 2021-10-09 11:26:49
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="display: flex;align-items: center;justify-content: space-between;height: 200px;">
+        <div style="height: 1000px;width: 100px;"></div>
+        <div style="display: flex;">
+            <div>1111111111111</div>
+            <div>2222222222222</div>
+        </div>
+        <div id="zhj1214" style="display: flex;flex-wrap: wrap;">
+            <div>4444444444444444444</div>
+            <div>5555555555555</div>
+            <div>666666666666666</div>
+            <div>77777777777777777777</div>
+            <div>8888888888888888</div>
+            <div>999999999999</div>
+            <div>10000000000000000</div>
+        </div>
+    </div>
+    <script>
+        // 选择需要观察变动的节点
+        const targetNode = document.getElementById('zhj1214');
+
+        // 观察器的配置（需要观察什么变动）
+        const config = { attributes: true, childList: true, subtree: true };
+
+        // 当观察到变动时执行的回调函数
+        const callback = function (mutationsList, observer) {
+            console.log(mutationsList, 'mutationsList', observer)
+            // Use traditional 'for loops' for IE 11
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log('A child node has been added or removed.');
+                }
+                else if (mutation.type === 'attributes') {
+                    console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                }
+            }
+        };
+
+        // 创建一个观察器实例并传入回调函数
+        const observer = new MutationObserver(callback);
+
+        // 以上述配置开始观察目标节点
+        observer.observe(targetNode, config);
+
+        // 之后，可停止观察
+        // observer.disconnect();
+
+    </script>
+</body>
+
+</html>

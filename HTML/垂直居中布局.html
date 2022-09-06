@@ -4,7 +4,7 @@
  * @Autor: zhj1214
  * @Date: 2021-12-16 14:38:07
  * @LastEditors: zhj1214
- * @LastEditTime: 2022-02-17 14:00:09
+ * @LastEditTime: 2022-07-14 14:42:52
 -->
 <style type="text/css">
     .item {
@@ -70,9 +70,58 @@
         width: 200px;
         background-color: rgba(222, 201, 110, 0.5);
     }
+
+
+
+    .test {
+        width: 100px;
+        height: 50px;
+        border: 1px solid red;
+        background-color: blue;
+        border-radius: 0 0px 50px 50px;
+        position: relative;
+    }
+
+    .test::after {
+        content: '';
+        background-color: #fff;
+        width: 110px;
+        height: 44px;
+        position: absolute;
+        border-radius: 5px 5px 55px 55px;
+        overflow: hidden;
+        top: 0;
+        left: -5px;
+
+    }
+
+    .test1 {
+        top: 0px;
+        left: 0px;
+
+
+        position: absolute;
+        width: 27px;
+        height: 26px;
+        border: 4px solid red;
+        background-color: #fff;
+        border-radius: 13px;
+
+    }
+
+    .test1::after {
+        content: '';
+        background-color: green;
+        width: 36px;
+        height: 22px;
+        position: absolute;
+        top: -4px;
+        left: -4px;
+
+    }
 </style>
 
-<div>
+<div style="padding: 5px;">
     <div class="parentView" style="width: 200px;">
         <img src="../Downloads/1111.png" alt="" srcset="">
         <div class="child">
@@ -118,7 +167,7 @@
         <div class="item" style="width: auto;">父级：position:relative;width: 600px;left: 50%;transform: translate(-50%,
             0%);</div>
     </div>
-
+    <div class="test1"></div>
 </div>
 
 
@@ -133,13 +182,13 @@
         setTimeout(() => resolve('333333'), 3000)
     })
 
-    const list = [p1, p2, p3]
+    const list = [ p1, p2, p3 ]
 
     let arr = []
 
     list.forEach((p, index) => {
         p.then(e => {
-            arr[index] = e
+            arr[ index ] = e
             if (arr.length === 3)
                 console.log('请求结果111', arr)
         })
@@ -148,7 +197,7 @@
 
 
 
-    Promise.all([p1, p2, p3])
+    Promise.all([ p1, p2, p3 ])
         // Promise.allSettled([p1,p2,p3])
         // Promise.race([p1, p2, p3])
         // p2
@@ -161,4 +210,3 @@
     //   Promise.reject(2).then((val) => {console.log('000',val)}, (val) => {console.log('01',val)})
     //   Promise.reject(2).finally((val) => {console.log('002',val)})
 </script>
-

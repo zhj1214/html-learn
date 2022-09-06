@@ -1,0 +1,88 @@
+<!--
+ * @Description: 
+ * @Version: 0.0.1
+ * @Autor: zhj1214
+ * @Date: 2022-02-11 11:42:48
+ * @LastEditors: zhj1214
+ * @LastEditTime: 2022-08-17 10:26:40
+-->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+    
+    </div>
+    
+</body>
+
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head> 
+    <meta charset="utf-8"> 
+    <title>菜鸟教程(runoob.com)</title> 
+</head>
+
+<body>
+
+
+    <input results="s" confirm-type="search" type="search" size="20px" placeholder="搜索">
+
+
+    <audio loop="loop" autoplay="autoplay">
+        <source src="horse.ogg" type="audio/ogg">
+        <source src="horse.mp3" type="audio/mpeg">
+        您的浏览器不支持 audio 元素。
+    </audio>
+
+    <!-- //自己修改音乐位置 preload="auto" -->
+    <!-- <audio loop="loop" autoplay="autoplay">
+        <source
+            src="http://m10.music.126.net/20220211114957/8c5488809f0d6b2d75e7c4e64e860390/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/2886659847/403f/f9dd/4797/5425846e652548e709b220727f0cd662.mp3"
+            type="audio/mpeg">
+    </audio> -->
+
+    <br>
+    //效果为 input聚焦的时候labelbox盒子边框为蓝色，失焦为黑色
+    <div class="fatherbox">
+        <input class='box' placeholder="请输入提现金额" />
+        <label class="labelbox"></label>
+    </div>
+
+    <style>
+        .fatherbox {
+            position: relative;
+            width: 200px;
+        }
+
+        .labelbox {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            /* 必须在输入框的下面 */
+            z-index: -1;
+            border: 1px solid black;
+        }
+
+        .box:focus+.labelbox {
+            border: 1px solid blue;
+        }
+    </style>
+
+</body>
+
+</html>

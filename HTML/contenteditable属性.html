@@ -1,0 +1,102 @@
+<!--
+ * @Description: 
+ * @Version: 0.0.1
+ * @Autor: zhj1214
+ * @Date: 2022-02-17 14:00:31
+ * @LastEditors: zhj1214
+ * @LastEditTime: 2022-07-12 09:26:42
+-->
+<div class="contain" contenteditable="true">
+  可插入文本、图片、链接、等
+</div>
+<ion-content scroll="true" class="padding-10" ng-style="contentMarginBottom"
+  style="z-index: -2;bottom:42px;margin-top:50px;" contenteditable="true" id="editor"
+  class="editor scroll padding-top-bottom-5" class="w-e-text">
+  <p contenteditable="true">输入你的内容（5字+）</p>
+</ion-content>
+<div style="background: #f2f2f2;color: #999999;border: 1px solid #cccccc;font-size: 13px;position: fixed;bottom: 0"
+  class="text-align-r width-100" ng-style="keyboardHeight">
+  <p id="in_pic" ng-click="imgPush($index)" style="float:left; margin:10px;"> <i class="icon ion-image"
+      style="font-size:20px; display:block;"></i> </p>
+  <p id="in_mp3" ng-click="insertLink()" style="float:left;margin:10px;"> <i class="icon ion-link"
+      style="font-size:20px; display:block;transform:rotate(120deg);"></i> </p>
+  <p id="in_goods" ng-click="insertpro()" style="float:left;margin:10px;"> 商品 </p>
+
+  <span>最多允许上传9张</span>
+</div>
+
+<style>
+  .contain {
+    width: 400px;
+    min-height: 200px;
+    max-height: 500px;
+    padding: 3px;
+    border: 1px solid #a0b3d6;
+    font-size: 12px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .editor {
+    border: 1px solid #eee;
+    padding: 0 10px;
+    line-height: 1.5em;
+    overflow-y: scroll;
+    max-width: 100%;
+    height: 500px;
+  }
+</style>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+
+<script>
+  $scope.insertpro = function () {
+    //调用原生插件上传MP3      
+    $('#editor').focus();
+    $scope.saveRange();
+    //将返回的结果放到append中插入到文本框
+    $scope.insert(" <div contenteditable=\"false\" style=\"background:#f2f2f2;padding:10px;height:60px;margin:5px 0;\"><img src=\"http://cdn21.ehaier.com/file/5865ed26b702b753a6942244.png\" style=\"height:40px;max-width:20%;margin-right:10%;float:left;\"/> <p style=\"width:70%;height:40px;overflow:hidden;float:left;\">统帅 空调KFR-35GW/17HAA统帅 空调KFR-35GW/17HAA21ATU1套机统帅 空调KFR-35GW/17HAA21ATU1套机统帅 空调KFR-35GW/17HAA21ATU1套机21ATU1套机</p></div ></br > ")
+
+  }
+  var _range;
+  $scope.saveRange = function () {
+
+    var selection = window.getSelection ? window.getSelection() : document.selection;
+    var range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
+    _range = range;
+  }
+  $('#editor').focus();
+  $scope.saveRange()
+  $scope.insert = function (str) {
+
+    if (!window.getSelection) {
+      $('#editor').focus();
+      var selection = window.getSelection ? window.getSelection() : document.selection;
+      var range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
+      range.pasteHTML(str);
+      range.collapse(false);
+      range.select();
+    } else {
+      $('#editor').focus();
+      var selection = window.getSelection ? window.getSelection() : document.selection;
+      selection.addRange(_range);
+      range = _range;
+      range.collapse(false);
+      var hasR = range.createContextualFragment(str);
+      var hasR_lastChild = hasR.lastChild;
+      while (hasR_lastChild && hasR_lastChild.nodeName.toLowerCase() == "br" && hasR_lastChild.previousSibling && hasR_lastChild.previousSibling.nodeName.toLowerCase() == "br") {
+        var e = hasR_lastChild;
+        hasR_lastChild = hasR_lastChild.previousSibling;
+        hasR.removeChild(e)
+      }
+      range.insertNode(hasR);
+      if (hasR_lastChild) {
+        range.setEndAfter(hasR_lastChild);
+        range.setStartAfter(hasR_lastChild)
+      }
+      selection.removeAllRanges();
+      selection.addRange(range)
+    }
+  }
+
+</script>

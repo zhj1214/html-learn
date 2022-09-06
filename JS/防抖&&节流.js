@@ -4,7 +4,7 @@
  * @Autor: zhj1214
  * @Date: 2021-10-09 17:28:37
  * @LastEditors: zhj1214
- * @LastEditTime: 2022-03-24 16:51:10
+ * @LastEditTime: 2022-09-06 13:52:56
  */
 
 /**
@@ -61,3 +61,69 @@ function fn_jl_fd(fn, delay) {
         }
     }
 }
+
+
+
+/**
+ * @description 防抖函数
+ * @param {Function} func 需要防抖的函数
+ * @param {Number} wait 防抖时间
+ * @param {Boolean} immediate 是否即时响应
+ * @return {*} 返回防抖后的函数
+ */
+ export function getDebounce(func: any, wait: number, immediate: boolean) {
+    let timeout: any, args: any, context: any, timestamp: number, result: any
+    if (null == wait) {
+      wait = 100
+    }
+  
+    function later() {
+      const last = Date.now() - timestamp
+  
+      if (last < wait && last >= 0) {
+        timeout = setTimeout(later, wait - last)
+      } else {
+        timeout = null
+        if (!immediate) {
+          result = func.apply(context, args)
+          context = args = null
+        }
+      }
+    }
+  
+    const debounced = function () {
+      context = this
+      args = arguments
+      timestamp = Date.now()
+      const callNow = immediate && !timeout
+      if (!timeout) {
+        timeout = setTimeout(later, wait)
+      }
+      if (callNow) {
+        result = func.apply(context, args)
+        context = args = null
+      }
+  
+      return result
+    }
+  
+    debounced.clear = function () {
+      if (timeout) {
+        clearTimeout(timeout)
+        timeout = null
+      }
+    }
+  
+    debounced.flush = function () {
+      if (timeout) {
+        result = func.apply(context, args)
+        context = args = null
+  
+        clearTimeout(timeout)
+        timeout = null
+      }
+    }
+  
+    return debounced
+  }
+  
